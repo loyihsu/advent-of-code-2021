@@ -7,5 +7,13 @@
 
 import Foundation
 
-print("Hello, World!")
+func solver_1() {
 
+}
+
+func solver_2() {
+
+}
+
+solver_1()
+solver_2()

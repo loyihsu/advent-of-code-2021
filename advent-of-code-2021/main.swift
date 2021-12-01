@@ -36,5 +36,5 @@ func solver_2(input: String) -> Int {
     return output
 }
 
-//print(solver_1(input: getIoFile(for: .question1)))
+print(solver_1(input: getIoFile(for: .question1)))
 print(solver_2(input: getIoFile(for: .question1)))

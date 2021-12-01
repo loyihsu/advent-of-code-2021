@@ -24,3 +24,10 @@ func getIoFile(for selector: Selector) -> String {
     }
     return content
 }
+
+/// Quickly create integer list from the input file.
+func getIntegerList(from input: String) -> [Int] {
+    return input.components(separatedBy: .newlines)
+        .filter({ !$0.isEmpty })
+        .map { Int($0)! }
+}

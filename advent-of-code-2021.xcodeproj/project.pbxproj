@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF0540D027575E6E005A1FA3 /* question1-input.io in Sources */ = {isa = PBXBuildFile; fileRef = FF0540CF27575E6E005A1FA3 /* question1-input.io */; };
+		FF0540D3275761A4005A1FA3 /* config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0540D2275761A4005A1FA3 /* config.swift */; };
 		FFFDD7F72756B3CC00CAFE39 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFDD7F62756B3CC00CAFE39 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +25,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FF0540CF27575E6E005A1FA3 /* question1-input.io */ = {isa = PBXFileReference; lastKnownFileType = text; path = "question1-input.io"; sourceTree = "<group>"; };
+		FF0540D2275761A4005A1FA3 /* config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = config.swift; sourceTree = "<group>"; };
+		FF0540D4275761E9005A1FA3 /* question2-input.io */ = {isa = PBXFileReference; lastKnownFileType = text; path = "question2-input.io"; sourceTree = "<group>"; };
 		FFFDD7F32756B3CC00CAFE39 /* advent-of-code-2021 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "advent-of-code-2021"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFFDD7F62756B3CC00CAFE39 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -38,6 +43,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF0540D127575E72005A1FA3 /* io */ = {
+			isa = PBXGroup;
+			children = (
+				FF0540CF27575E6E005A1FA3 /* question1-input.io */,
+				FF0540D4275761E9005A1FA3 /* question2-input.io */,
+			);
+			path = io;
+			sourceTree = "<group>";
+		};
 		FFFDD7EA2756B3CC00CAFE39 = {
 			isa = PBXGroup;
 			children = (
@@ -57,6 +71,8 @@
 		FFFDD7F52756B3CC00CAFE39 /* advent-of-code-2021 */ = {
 			isa = PBXGroup;
 			children = (
+				FF0540D2275761A4005A1FA3 /* config.swift */,
+				FF0540D127575E72005A1FA3 /* io */,
 				FFFDD7F62756B3CC00CAFE39 /* main.swift */,
 			);
 			path = "advent-of-code-2021";
@@ -120,7 +136,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF0540D3275761A4005A1FA3 /* config.swift in Sources */,
 				FFFDD7F72756B3CC00CAFE39 /* main.swift in Sources */,
+				FF0540D027575E6E005A1FA3 /* question1-input.io in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

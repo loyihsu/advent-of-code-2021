@@ -15,5 +15,8 @@ func solver_2() {
 
 }
 
-solver_1()
-solver_2()
+//solver_1()
+//solver_2()
+
+let input = getIoFile(for: .question2)
+print(input)

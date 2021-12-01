@@ -12,7 +12,7 @@ let projectPath = "\(desktopPath)advent-of-code-2021/"
 let foldername = "advent-of-code-2021/io/"
 
 enum Selector: String {
-    case question1 = "question1-input.io", question2 = "question2-input.io"
+    case question1 = "question1-input.io", question2 = "question2-input.io", sample = "sample-input.io"
 }
 
 func getIoFile(for selector: Selector) -> String {

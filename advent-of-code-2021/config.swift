@@ -31,3 +31,10 @@ func getIntegerList(from input: String) -> [Int] {
         .filter({ !$0.isEmpty })
         .map { Int($0)! }
 }
+
+func getParsedStringsFromLinesAndSpaces(from input: String) -> [[String]] {
+    let lines = input.components(separatedBy: .newlines)
+    return lines.map {
+        $0.components(separatedBy: .whitespaces)
+    }
+}

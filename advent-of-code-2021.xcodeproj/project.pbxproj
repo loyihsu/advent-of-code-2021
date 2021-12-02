@@ -28,6 +28,7 @@
 		FF0540CF27575E6E005A1FA3 /* question1-input.io */ = {isa = PBXFileReference; lastKnownFileType = text; path = "question1-input.io"; sourceTree = "<group>"; };
 		FF0540D2275761A4005A1FA3 /* config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = config.swift; sourceTree = "<group>"; };
 		FF0540D4275761E9005A1FA3 /* question2-input.io */ = {isa = PBXFileReference; lastKnownFileType = text; path = "question2-input.io"; sourceTree = "<group>"; };
+		FFA4AEE12758BD22006D26BB /* sample-input.io */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sample-input.io"; sourceTree = "<group>"; };
 		FFFDD7F32756B3CC00CAFE39 /* advent-of-code-2021 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "advent-of-code-2021"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFFDD7F62756B3CC00CAFE39 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -48,6 +49,7 @@
 			children = (
 				FF0540CF27575E6E005A1FA3 /* question1-input.io */,
 				FF0540D4275761E9005A1FA3 /* question2-input.io */,
+				FFA4AEE12758BD22006D26BB /* sample-input.io */,
 			);
 			path = io;
 			sourceTree = "<group>";

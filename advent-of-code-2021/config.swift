@@ -32,6 +32,7 @@ func getIntegerList(from input: String) -> [Int] {
         .map { Int($0)! }
 }
 
+/// The input will be separated into lines, and each line will be further parsed into a String array separated by spaces.
 func getParsedStringsFromLinesAndSpaces(from input: String) -> [[String]] {
     let lines = input.components(separatedBy: .newlines)
     return lines.map {

@@ -39,3 +39,9 @@ func getParsedStringsFromLinesAndSpaces(from input: String) -> [[String]] {
         $0.components(separatedBy: .whitespaces)
     }
 }
+
+// Get the input in plain text list form.
+func getPlainStringList(from input: String) -> [String] {
+    return input.components(separatedBy: .newlines)
+        .filter({!$0.isEmpty })
+}

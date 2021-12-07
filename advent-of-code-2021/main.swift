@@ -7,13 +7,22 @@
 
 import Foundation
 
-func solver_1(input: String) {
-
+func solver(input: String, question2: Bool = false) -> Int {
+    let list = getIntegerList(from: input.trimmingCharacters(in: .newlines), separator: ",")
+    var min = Int.max
+    if let left = list.min(), let right = list.max() {
+        for destination in left...right {
+            var tmp = 0
+            for item in list {
+                let distance = abs(item-destination)
+                // Select formula by mode
+                tmp += question2 ? (1 + distance) * distance / 2 : abs(item - destination)
+            }
+            min = tmp < min ? tmp : min
+        }
+    }
+    return min
 }
 
-func solver_2(input: String) {
-
-}
-
-//solver_1(input: getIoFile(for: .question1))
-//solver_2(input: getIoFile(for: .question2))
+print(solver(input: getIoFile(for: .question1)))
+print(solver(input: getIoFile(for: .question1), question2: true))

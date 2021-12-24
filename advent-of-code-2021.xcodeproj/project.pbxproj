@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FF0540D027575E6E005A1FA3 /* question1-input.io in Sources */ = {isa = PBXBuildFile; fileRef = FF0540CF27575E6E005A1FA3 /* question1-input.io */; };
 		FF0540D3275761A4005A1FA3 /* config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0540D2275761A4005A1FA3 /* config.swift */; };
+		FF411EA82775C31B00AF9375 /* Heap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF411EA72775C31B00AF9375 /* Heap.swift */; };
 		FFFDD7F72756B3CC00CAFE39 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFDD7F62756B3CC00CAFE39 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		FF0540CF27575E6E005A1FA3 /* question1-input.io */ = {isa = PBXFileReference; lastKnownFileType = text; path = "question1-input.io"; sourceTree = "<group>"; };
 		FF0540D2275761A4005A1FA3 /* config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = config.swift; sourceTree = "<group>"; };
 		FF0540D4275761E9005A1FA3 /* question2-input.io */ = {isa = PBXFileReference; lastKnownFileType = text; path = "question2-input.io"; sourceTree = "<group>"; };
+		FF411EA72775C31B00AF9375 /* Heap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Heap.swift; path = ../../../Heap.swift; sourceTree = "<group>"; };
 		FFA4AEE12758BD22006D26BB /* sample-input.io */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sample-input.io"; sourceTree = "<group>"; };
 		FFFDD7F32756B3CC00CAFE39 /* advent-of-code-2021 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "advent-of-code-2021"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFFDD7F62756B3CC00CAFE39 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				FF0540D2275761A4005A1FA3 /* config.swift */,
 				FF0540D127575E72005A1FA3 /* io */,
 				FFFDD7F62756B3CC00CAFE39 /* main.swift */,
+				FF411EA72775C31B00AF9375 /* Heap.swift */,
 			);
 			path = "advent-of-code-2021";
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 				FF0540D3275761A4005A1FA3 /* config.swift in Sources */,
 				FFFDD7F72756B3CC00CAFE39 /* main.swift in Sources */,
 				FF0540D027575E6E005A1FA3 /* question1-input.io in Sources */,
+				FF411EA82775C31B00AF9375 /* Heap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

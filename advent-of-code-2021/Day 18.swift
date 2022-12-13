@@ -13,6 +13,7 @@ class SnailNumber: Equatable {
     static func == (lhs: SnailNumber, rhs: SnailNumber) -> Bool {
         lhs.id == rhs.id
     }
+
     var id = UUID()
     var value: Int?
     var parent: SnailNumber?, left: SnailNumber?, right: SnailNumber?
@@ -22,9 +23,11 @@ class SnailNumber: Equatable {
         left?.parent = self
         right?.parent = self
     }
+
     init(value: Int) {
         self.value = value
     }
+
     func reduce() {
         var flag = true
         while flag {
@@ -35,6 +38,7 @@ class SnailNumber: Equatable {
             flag = flag || split()
         }
     }
+
     func explode() -> Bool {
         if value == nil {
             if depth >= 4 {
@@ -59,11 +63,12 @@ class SnailNumber: Equatable {
         }
         return false
     }
+
     func split() -> Bool {
         if let current = value {
             if current >= 10 {
                 let half = current / 2
-                (value, left, right) = (nil, SnailNumber(value: half), SnailNumber(value: current-half))
+                (value, left, right) = (nil, SnailNumber(value: half), SnailNumber(value: current - half))
                 left?.parent = self
                 right?.parent = self
                 return true
@@ -102,7 +107,7 @@ class SnailNumber: Equatable {
 
     var allSnailNumbers: [SnailNumber] {
         if value != nil {
-             return [self]
+            return [self]
         }
         var all = [SnailNumber]()
         if let left = left {
@@ -118,6 +123,7 @@ class SnailNumber: Equatable {
         guard let parent = parent else { return 0 }
         return parent.depth + 1
     }
+
     static func parser(_ input: String) -> SnailNumber? {
         // If it is already a digit only, return the snail number created from it.
         guard input.count > 1 else { return SnailNumber(value: Int(input)!) }
@@ -128,16 +134,17 @@ class SnailNumber: Equatable {
                 stack.append(char)
             } else if char == "]" {
                 _ = stack.removeLast()
-            } else if char == "," && stack.count == 1 {
+            } else if char == ",", stack.count == 1 {
                 splitPos = input.index(input.startIndex, offsetBy: idx)
             }
         }
         guard let splitPos = splitPos else {
             return nil
         }
-        return SnailNumber(left: parser(String(input[input.index(after: input.startIndex)..<splitPos])),
-                           right: parser(String(input[input.index(after: splitPos)..<input.index(before: input.endIndex)])))
+        return SnailNumber(left: parser(String(input[input.index(after: input.startIndex) ..< splitPos])),
+                           right: parser(String(input[input.index(after: splitPos) ..< input.index(before: input.endIndex)])))
     }
+
     var magnitude: Int {
         if let value = value {
             return value

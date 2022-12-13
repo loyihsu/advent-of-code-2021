@@ -9,14 +9,14 @@ import Foundation
 
 func handler(for input: String) -> [[(Int, Int)]] {
     getPlainStringList(from: input)
-        .map({
+        .map {
             $0.components(separatedBy: " -> ")
-                .map({ item -> (x: Int, y: Int) in
+                .map { item -> (x: Int, y: Int) in
                     let separated = item.components(separatedBy: ",")
-                        .compactMap({ Int($0) })
+                        .compactMap { Int($0) }
                     return (separated[0], separated[1])
-                })
-        })
+                }
+        }
 }
 
 func createBook(_ lines: [[(x: Int, y: Int)]], diagonal: Bool = false) -> [String: Int] {
@@ -30,8 +30,8 @@ func createBook(_ lines: [[(x: Int, y: Int)]], diagonal: Bool = false) -> [Strin
         let condition = diagonal ? horOrVerCheck || diagonalCheck : horOrVerCheck
         if condition {
             // List all the points' x and y position
-            var xrange = Array(min(line[0].x, line[1].x)...max(line[0].x, line[1].x))
-            var yrange = Array(min(line[0].y, line[1].y)...max(line[0].y, line[1].y))
+            var xrange = Array(min(line[0].x, line[1].x) ... max(line[0].x, line[1].x))
+            var yrange = Array(min(line[0].y, line[1].y) ... max(line[0].y, line[1].y))
             // Correct them if the line is reversed (for diagonal especially)
             xrange = line[0].x > line[1].x ? xrange.reversed() : xrange
             yrange = line[0].y > line[1].y ? yrange.reversed() : yrange
@@ -49,13 +49,13 @@ func createBook(_ lines: [[(x: Int, y: Int)]], diagonal: Bool = false) -> [Strin
 
 func solver_1(input: String) -> Int {
     createBook(handler(for: input))
-        .filter({ $1 >= 2 })
+        .filter { $1 >= 2 }
         .count
 }
 
 func solver_2(input: String) -> Int {
     createBook(handler(for: input), diagonal: true)
-        .filter({ $1 >= 2 })
+        .filter { $1 >= 2 }
         .count
 }
 

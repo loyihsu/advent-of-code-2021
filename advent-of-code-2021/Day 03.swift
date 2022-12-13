@@ -33,7 +33,7 @@ func filter(_ list: [[Character]], most: Bool) -> String {
         let count = count(list: list, row: idx)
         // Get condition by execution mode
         let condition = most ? count.one >= count.zero : count.zero > count.one
-        list = list.filter({ condition ? $0[idx] == "1" : $0[idx] == "0" })
+        list = list.filter { condition ? $0[idx] == "1" : $0[idx] == "0" }
     }
     return String(list[0])
 }
@@ -41,13 +41,13 @@ func filter(_ list: [[Character]], most: Bool) -> String {
 func decimal(of binary: String) -> Int {
     var output = 0
     // Convert binary to decimal with linear complexity
-    binary.forEach({ output = 2 * output + ($0 == "1" ? 1 : 0) })
+    binary.forEach { output = 2 * output + ($0 == "1" ? 1 : 0) }
     return output
 }
 
 func solver_1(input: String) -> Int {
     let list = getPlainStringList(from: input)
-        .map({ Array($0) })
+        .map { Array($0) }
     let gamma = gamma(of: list)
     // Epsilon is the inverted gamma
     let epsilon = String(gamma.map { $0 == "0" ? "1" : "0" })
@@ -56,7 +56,7 @@ func solver_1(input: String) -> Int {
 
 func solver_2(input: String) -> Int {
     let list = getPlainStringList(from: input)
-        .map({ Array($0) })
+        .map { Array($0) }
     let oxygen = filter(list, most: true)
     let co2 = filter(list, most: false)
     return decimal(of: oxygen) * decimal(of: co2)

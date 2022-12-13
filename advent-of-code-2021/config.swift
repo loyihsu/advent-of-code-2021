@@ -28,7 +28,7 @@ func getIoFile(for selector: Selector) -> String {
 /// Quickly create integer list from the input file.
 func getIntegerList(from input: String, separator: String = "\n") -> [Int] {
     return input.components(separatedBy: separator)
-        .filter({ !$0.isEmpty })
+        .filter { !$0.isEmpty }
         .map { Int($0)! }
 }
 
@@ -43,5 +43,5 @@ func getParsedStringsFromLinesAndSpaces(from input: String) -> [[String]] {
 // Get the input in plain text list form.
 func getPlainStringList(from input: String) -> [String] {
     return input.components(separatedBy: .newlines)
-        .filter({!$0.isEmpty })
+        .filter { !$0.isEmpty }
 }

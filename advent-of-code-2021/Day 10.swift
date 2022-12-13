@@ -44,7 +44,7 @@ func solver_2(input: [[Character]]) -> Int {
         }
         values.append(item)
     }
-    return values.sorted()[values.count/2]
+    return values.sorted()[values.count / 2]
 }
 
 let res = solver_1(input: getIoFile(for: .question1))

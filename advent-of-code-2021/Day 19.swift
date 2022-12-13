@@ -19,30 +19,30 @@ func hash(for value: (Int, Int)) -> Int {
 }
 
 func hash(for value: (Int, Int, Int)) -> Int {
-    return value.0 * 1000000 + value.1 * 1000 + value.2
+    return value.0 * 1_000_000 + value.1 * 1000 + value.2
 }
 
-let negations = [(1,1,1), (1,1,-1), (1,-1,1), (-1,1,1), (1,-1,-1), (-1,1,-1), (-1,-1,1), (-1,-1,-1)]
-let remaps = [(0,1,2), (1,0,2), (1,2,0), (0,2,1), (2,0,1), (2,1,0)]
+let negations = [(1, 1, 1), (1, 1, -1), (1, -1, 1), (-1, 1, 1), (1, -1, -1), (-1, 1, -1), (-1, -1, 1), (-1, -1, -1)]
+let remaps = [(0, 1, 2), (1, 0, 2), (1, 2, 0), (0, 2, 1), (2, 0, 1), (2, 1, 0)]
 
 func apply(negation: (Int, Int, Int), remap: (Int, Int, Int), to points: [[Int]]) -> [[Int]] {
-    return points.map({ point in
+    return points.map { point in
         [point[remap.0] * negation.0, point[remap.1] * negation.1, point[remap.2] * negation.2]
-    })
+    }
 }
 
-var locations = [(0,0,0)]   // For part 2
+var locations = [(0, 0, 0)] // For part 2
 func find_alignment(this: [[Int]], another: [[Int]]) -> [[Int]]? {
-    let insides = Set(this.map({ hash(for: $0) }))
+    let insides = Set(this.map { hash(for: $0) })
     for remap in remaps {
         for negation in negations {
             let first = this, second = apply(negation: negation, remap: remap, to: another)
             for firstItem in first {
                 for secondItem in second {
-                    let temp = [secondItem[0]-firstItem[0], secondItem[1]-firstItem[1], secondItem[2]-firstItem[2]]
+                    let temp = [secondItem[0] - firstItem[0], secondItem[1] - firstItem[1], secondItem[2] - firstItem[2]]
                     var matches = 0, all_remapped = [[Int]]()
                     for others in second {
-                        let remapped = [others[0]-temp[0], others[1]-temp[1], others[2]-temp[2]]
+                        let remapped = [others[0] - temp[0], others[1] - temp[1], others[2] - temp[2]]
                         if insides.contains(hash(for: remapped)) {
                             matches += 1
                         }
@@ -104,7 +104,7 @@ func solver_2() -> Int {
     for idx in locations.indices {
         for jdx in locations.indices where idx != jdx {
             let first = locations[idx], second = locations[jdx]
-            distance.append(abs(first.0-second.0) + abs(first.1-second.1) + abs(first.2-second.2))
+            distance.append(abs(first.0 - second.0) + abs(first.1 - second.1) + abs(first.2 - second.2))
         }
     }
     return distance.max() ?? 0

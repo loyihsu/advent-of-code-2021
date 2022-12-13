@@ -35,11 +35,11 @@ func sumAllUnmarked(_ board: [[(String, Bool)]]) -> Int {
 func getCallListAndBoards(from input: String) -> ([String], [[[(String, Bool)]]]) {
     let partitions = input.components(separatedBy: "\n\n")
     let callList = partitions[0].components(separatedBy: ",")
-    let boards = partitions[1...].map({
+    let boards = partitions[1...].map {
         $0.components(separatedBy: .newlines)
-            .map({ $0.components(separatedBy: .whitespaces).map({ ($0, false) }).filter({ !$0.0.isEmpty }) })
-            .filter({ !$0.isEmpty })
-    })
+            .map { $0.components(separatedBy: .whitespaces).map { ($0, false) }.filter { !$0.0.isEmpty } }
+            .filter { !$0.isEmpty }
+    }
     return (callList, boards)
 }
 
@@ -63,7 +63,7 @@ func solver_1(input: String) -> Int? {
 }
 
 func solver_2(input: String) -> Int? {
-    var (callList, boards) =  getCallListAndBoards(from: input)
+    var (callList, boards) = getCallListAndBoards(from: input)
     var boardCompletion = [Bool](repeating: false, count: boards.count)
     for call in callList {
         for board in boards.indices {

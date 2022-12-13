@@ -8,7 +8,7 @@
 import Foundation
 
 func count(in path: [String], value: String) -> Int {
-    return path.filter({ $0 == value }).count
+    return path.filter { $0 == value }.count
 }
 
 func solver(input: String, smallCount: Int) -> Int {
@@ -30,14 +30,14 @@ func solver(input: String, smallCount: Int) -> Int {
         }
         if let steps = router[last] {
             for possibility in steps where possibility != "start" {
-                let count = path.0.filter({ $0 == possibility }).count
+                let count = path.0.filter { $0 == possibility }.count
                 let uppercased = possibility == possibility.uppercased()
                 let beforeDupes = path.1.isEmpty && count < smallCount
                 let otherThanDupes = !path.1.isEmpty && path.1 != possibility && count < 1
                 if uppercased || beforeDupes || otherThanDupes {
                     var temp = path
                     temp.0.append(possibility)
-                    if !uppercased && temp.0.filter({ $0 == possibility }).count == smallCount {
+                    if !uppercased, temp.0.filter({ $0 == possibility }).count == smallCount {
                         temp.1 = possibility
                     }
                     paths.append(temp)

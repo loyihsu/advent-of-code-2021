@@ -11,15 +11,15 @@ func solver(input: String) -> Int {
     let input = input.components(separatedBy: "\n\n")
     var maxWidth = 0, maxHeight = 0
     var counter: Int?
-    let dots = input[0].components(separatedBy: .newlines).map({ input -> (Int, Int) in
-        let list = input.components(separatedBy: ",").compactMap({ item in Int(item) })
+    let dots = input[0].components(separatedBy: .newlines).map { input -> (Int, Int) in
+        let list = input.components(separatedBy: ",").compactMap { item in Int(item) }
         maxWidth = max(list[0], maxWidth)
         maxHeight = max(list[1], maxHeight)
         return (list[0], list[1])
-    })
+    }
     let instructions = input[1].trimmingCharacters(in: .newlines)
         .components(separatedBy: .newlines)
-    var map = [[Bool]](repeating: [Bool](repeating: false, count: maxWidth+1), count: maxHeight+1)
+    var map = [[Bool]](repeating: [Bool](repeating: false, count: maxWidth + 1), count: maxHeight + 1)
 
     for dot in dots {
         map[dot.1][dot.0] = true

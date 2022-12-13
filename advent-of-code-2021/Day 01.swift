@@ -12,7 +12,7 @@ func solver_1(input: String) -> Int {
     var output = 0
     // Compare with the previous item. (Therefore idx cannot be 0)
     for idx in numbers.indices where idx > 0 {
-        if numbers[idx] > numbers[idx-1] {
+        if numbers[idx] > numbers[idx - 1] {
             output += 1
         }
     }
@@ -21,11 +21,11 @@ func solver_1(input: String) -> Int {
 
 func solver_2(input: String) -> Int {
     let numbers = getIntegerList(from: input)
-    var prev: Int? = nil        // Use nil as signal for the first item.
+    var prev: Int? // Use nil as signal for the first item.
     var output = 0
 
     for idx in numbers.indices where idx >= 2 {
-        let sliderSum = numbers[idx-2...idx].reduce(0, +)   // Slider sum
+        let sliderSum = numbers[idx - 2 ... idx].reduce(0, +) // Slider sum
         // If not the first item, compare with the previous slider sum.
         if let prev = prev, sliderSum > prev {
             output += 1

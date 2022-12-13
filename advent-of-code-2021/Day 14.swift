@@ -20,16 +20,16 @@ func solver(input: String, max: Int) -> Int {
     }
 
     // Count the initial pairs
-    for idx in 0..<string.count-1 {
-        pairCounter[String(string[idx...idx+1]), default: 0] += 1
+    for idx in 0 ..< string.count - 1 {
+        pairCounter[String(string[idx ... idx + 1]), default: 0] += 1
     }
 
     // Update pair counters each round
-    for _ in 0..<max {
+    for _ in 0 ..< max {
         var newPair = [String: Int]()
         for (pair, occurrence) in pairCounter {
             if let found = map[pair], let first = pair.first, let last = pair.last {
-                ["\(first)\(found)", "\(found)\(last)"].forEach({ newPair[$0, default: 0] += occurrence })
+                ["\(first)\(found)", "\(found)\(last)"].forEach { newPair[$0, default: 0] += occurrence }
             }
         }
         pairCounter = newPair

@@ -9,9 +9,9 @@ import Foundation
 
 extension String {
     mutating func cutPartialString(range: Range<Int>) -> String {
-        let range = self.index(self.startIndex, offsetBy: range.lowerBound)..<self.index(self.startIndex, offsetBy: range.upperBound)
+        let range = index(startIndex, offsetBy: range.lowerBound) ..< index(startIndex, offsetBy: range.upperBound)
         let temp = String(self[range])
-        self.removeSubrange(range)
+        removeSubrange(range)
         return temp
     }
 }
@@ -19,7 +19,7 @@ extension String {
 func hexToBinary(_ hex: String) -> String {
     let converter = "0 = 0000,1 = 0001,2 = 0010,3 = 0011,4 = 0100,5 = 0101,6 = 0110,7 = 0111,8 = 1000,9 = 1001,A = 1010,B = 1011,C = 1100,D = 1101,E = 1110,F = 1111"
     var mapper = [String: String](), output = ""
-    let lines = converter.components(separatedBy: ",").map({ $0.components(separatedBy: " = ") })
+    let lines = converter.components(separatedBy: ",").map { $0.components(separatedBy: " = ") }
     for line in lines {
         mapper[line[0]] = line[1]
     }
@@ -38,8 +38,8 @@ func binaryConverter(_ value: String) -> Int {
 }
 
 func binaryProcessor(input: inout String, sum: inout Int) -> Int {
-    let version = binaryConverter("0\(input.cutPartialString(range: 0..<3))")
-    let typeId = binaryConverter("0\(input.cutPartialString(range: 0..<3))")
+    let version = binaryConverter("0\(input.cutPartialString(range: 0 ..< 3))")
+    let typeId = binaryConverter("0\(input.cutPartialString(range: 0 ..< 3))")
     sum += version
     return typeId == 4 ? binaryLiteral(input: &input) : binaryOperator(input: &input, typeId: typeId, sum: &sum)
 }
@@ -50,7 +50,7 @@ func binaryLiteral(input: inout String) -> Int {
         if let first = input.first, first == "0" {
             last = true
         }
-        var item = input.cutPartialString(range: 0..<5)
+        var item = input.cutPartialString(range: 0 ..< 5)
         _ = item.removeFirst()
         temp.append(contentsOf: item)
     }
@@ -62,14 +62,14 @@ func binaryOperator(input: inout String, typeId: Int, sum: inout Int) -> Int {
     if let lengthId = input.first {
         input.removeFirst()
         if lengthId == "0" {
-            let length = binaryConverter(String(input.cutPartialString(range: 0..<15)))
-            var subpackets = input.cutPartialString(range: 0..<length)
+            let length = binaryConverter(String(input.cutPartialString(range: 0 ..< 15)))
+            var subpackets = input.cutPartialString(range: 0 ..< length)
             while !subpackets.isEmpty {
                 found.append(binaryProcessor(input: &subpackets, sum: &sum))
             }
         } else if lengthId == "1" {
-            let length = binaryConverter(String(input.cutPartialString(range: 0..<11)))
-            for _ in 0..<length {
+            let length = binaryConverter(String(input.cutPartialString(range: 0 ..< 11)))
+            for _ in 0 ..< length {
                 found.append(binaryProcessor(input: &input, sum: &sum))
             }
         }

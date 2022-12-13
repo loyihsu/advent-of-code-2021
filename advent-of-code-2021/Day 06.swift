@@ -10,12 +10,12 @@ import Foundation
 func solver(input: String, days: Int) -> Int {
     let list = input.trimmingCharacters(in: .newlines)
         .components(separatedBy: ",")
-        .compactMap({ Int($0) })
+        .compactMap { Int($0) }
     var book = [Int](repeating: 0, count: 9)
     for item in list {
         book[item + 1] += 1
     }
-    for idx in 0...days {
+    for idx in 0 ... days {
         book[(idx + 7) % 9] += book[idx % 9]
     }
     return book.reduce(0, +)

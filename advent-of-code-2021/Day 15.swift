@@ -13,22 +13,22 @@ func expand(map: [[Int]], by value: Int) -> [[Int]] {
     var input = map, res = input
     // Expand horizontally
     for idx in input.indices {
-        for enhance in 1...value {
-            res[idx].append(contentsOf: input[idx].map({ ($0 + enhance) % 9 == 0 ? 9 : ($0 + enhance) % 9 }))
+        for enhance in 1 ... value {
+            res[idx].append(contentsOf: input[idx].map { ($0 + enhance) % 9 == 0 ? 9 : ($0 + enhance) % 9 })
         }
     }
     input = res
     // Expand vertically
-    for enhance in 1...value {
+    for enhance in 1 ... value {
         for line in input {
-            res.append(line.map({ ($0 + enhance) % 9 == 0 ? 9 : ($0 + enhance) % 9 }))
+            res.append(line.map { ($0 + enhance) % 9 == 0 ? 9 : ($0 + enhance) % 9 })
         }
     }
     return res
 }
 
 func solver(input: String, extend: Int = 1) -> Int {
-    var input = input.trimmingCharacters(in: .newlines).components(separatedBy: .newlines).map({ Array($0.compactMap(( { Int("\($0)") } ))) })
+    var input = input.trimmingCharacters(in: .newlines).components(separatedBy: .newlines).map { Array($0.compactMap(({ Int("\($0)") }))) }
     input = expand(map: input, by: extend)
 
     var queue = [(position: (x: Int, y: Int), cost: Int)]()
@@ -39,7 +39,7 @@ func solver(input: String, extend: Int = 1) -> Int {
 
     while let last = queue.popLast() {
         // Arrived at the destination
-        if last.position.x == input.count - 1 && last.position.y == input[0].count - 1 {
+        if last.position.x == input.count - 1, last.position.y == input[0].count - 1 {
             break
         }
         // Go for four directions
@@ -56,9 +56,9 @@ func solver(input: String, extend: Int = 1) -> Int {
                 queue.append((position: (x: x, y: y), cost: cost))
             }
         }
-        queue.sort(by: { $0.cost > $1.cost })   // Soft the queue so the items of min cost are at the last item - O(N log N)
+        queue.sort(by: { $0.cost > $1.cost }) // Soft the queue so the items of min cost are at the last item - O(N log N)
     }
-    return costmap[costmap.count-1][costmap[0].count-1]
+    return costmap[costmap.count - 1][costmap[0].count - 1]
 }
 
 print(solver(input: getIoFile(for: .question1)))

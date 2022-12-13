@@ -17,10 +17,11 @@ class ALU {
     private var register = 0
     let _input: Int
     var input: [Int]
-    init (input: Int) {
-        self.input = "\(input)".compactMap({ Int("\($0)") }).reversed()
-        self._input = input
+    init(input: Int) {
+        self.input = "\(input)".compactMap { Int("\($0)") }.reversed()
+        _input = input
     }
+
     private func read(from selector: String) -> Int {
         switch selector {
         case "w":
@@ -37,6 +38,7 @@ class ALU {
             return -1
         }
     }
+
     private func write(value: Int, to selector: String) {
         switch selector {
         case "w":
@@ -57,25 +59,31 @@ class ALU {
     func inp(_ a: String) {
         write(value: input.removeLast(), to: a)
     }
+
     func add(_ a: String, _ b: String) {
         write(value: read(from: a) + read(from: b), to: a)
     }
+
     func mul(_ a: String, _ b: String) {
         write(value: read(from: a) * read(from: b), to: a)
     }
+
     func div(_ a: String, _ b: String) {
         write(value: read(from: a) / read(from: b), to: a)
     }
+
     func mod(_ a: String, _ b: String) {
         write(value: read(from: a) % read(from: b), to: a)
     }
+
     func eql(_ a: String, _ b: String) {
         write(value: read(from: a) == read(from: b) ? 1 : 0, to: a)
     }
+
     func run() -> Int? {
         for command in commands {
             let segments = command.components(separatedBy: .whitespaces)
-            if segments[0] == "inp"  {
+            if segments[0] == "inp" {
                 inp(segments[1])
             } else if segments[0] == "add" {
                 if let b = Int(segments[2]) {
@@ -118,12 +126,12 @@ class ALU {
     }
 }
 
-let part1 = ALU(input: 91897399498995)
+let part1 = ALU(input: 91_897_399_498_995)
 if let result = part1.run() {
     print(result)
 }
 
-let part2 = ALU(input: 51121176121391)
+let part2 = ALU(input: 51_121_176_121_391)
 if let result = part2.run() {
     print(result)
 }

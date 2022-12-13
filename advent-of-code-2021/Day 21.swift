@@ -19,10 +19,10 @@ func solver_1(input: String) -> Int {
             positions.two = pos - 1
         }
     }
-    while scores.one < 1000 && scores.two < 1000 {
-        for round in 0...1 where scores.one < 1000 && scores.two < 1000 {
+    while scores.one < 1000, scores.two < 1000 {
+        for round in 0 ... 1 where scores.one < 1000 && scores.two < 1000 {
             counter += 1
-            let dieRow = (die...die+2).map({ $0 % 100 }).reduce(0, +)
+            let dieRow = (die ... die + 2).map { $0 % 100 }.reduce(0, +)
             die = (die + 3) % 100
             if round == 0 {
                 positions.one = (positions.one + dieRow) % 10
@@ -53,7 +53,7 @@ func expand(positions: (one: Int, two: Int), scores: (one: Int, two: Int), turn:
 
 func forker(positions: (one: Int, two: Int), scores: (one: Int, two: Int), turn: Bool) -> (Int, Int) {
     var sum = (0, 0)
-    let resultWeight = [3 : 1, 4: 3, 5: 6, 6: 7, 7: 6, 8: 3, 9: 1]  // Count possibilities of each roll combination
+    let resultWeight = [3: 1, 4: 3, 5: 6, 6: 7, 7: 6, 8: 3, 9: 1] // Count possibilities of each roll combination
     for roll in resultWeight.keys {
         let res = expand(positions: positions, scores: scores, turn: turn, value: roll)
         sum = (sum.0 + res.0 * resultWeight[roll, default: 1], sum.1 + res.1 * resultWeight[roll, default: 1])

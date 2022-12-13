@@ -49,27 +49,31 @@ class Map: Hashable {
     static func == (lhs: Map, rhs: Map) -> Bool {
         lhs.caves == rhs.caves && lhs.buffer == rhs.buffer && lhs.cost == rhs.cost
     }
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(caves)
         hasher.combine(buffer)
         hasher.combine(cost)
     }
+
     var caves: [[Pods]]
     var buffer = [Pods](repeating: .Empty, count: 11)
     var cost = 0
     init(caves: [String], cost: Int = 0) {
         self.caves = caves.compactMap { item in
             item.compactMap { char in
-                return Pods(rawValue: "\(char)")
+                Pods(rawValue: "\(char)")
             }
         }
         self.cost = cost
     }
+
     init(caves: [[Pods]], buffer: [Pods], cost: Int) {
         self.caves = caves
         self.buffer = buffer
         self.cost = cost
     }
+
     func isCaveDone(cave: Int) -> Bool {
         let mapper: [Int: Pods] = [0: .A, 1: .B, 2: .C, 3: .D]
         if let mapped = mapper[cave] {
@@ -77,6 +81,7 @@ class Map: Hashable {
         }
         return false
     }
+
     func isDone() -> Bool {
         for idx in caves.indices {
             if isCaveDone(cave: idx) == false {
@@ -85,6 +90,7 @@ class Map: Hashable {
         }
         return true
     }
+
     func isBlocking(_ pod: Int, in cave: Int) -> Bool {
         if pod == caves[cave].endIndex - 1 {
             return false
@@ -95,44 +101,50 @@ class Map: Hashable {
             })
         }
     }
+
     func isBlocked(_ pod: Int, in cave: Int) -> Bool {
         if pod == 0 {
             return false
         }
-        return caves[cave][0..<pod].contains(where: { $0 != .Empty })
+        return caves[cave][0 ..< pod].contains(where: { $0 != .Empty })
     }
+
     func isHome(item: Pods, cave: Int) -> Bool {
         return cave == target[item, default: 0]
     }
+
     func canMove(fromCave: Int, toAnotherCave: Int) -> Move? {
         // The cave is ready for input
         if !caves[toAnotherCave].contains(where: { !($0 == podsByTarget[toAnotherCave] || $0 == .Empty) }) {
             // There is nothing in the way
             let mover = (caveDoors[fromCave], caveDoors[toAnotherCave])
-            let range = buffer[min(mover.0, mover.1)...max(mover.0, mover.1)]
+            let range = buffer[min(mover.0, mover.1) ... max(mover.0, mover.1)]
             if !range.contains(where: { $0 != .Empty }) {
                 return CaveToCave(fromIndex: fromCave, toIndex: toAnotherCave)
             }
         }
         return nil
     }
+
     func canMove(fromCave: Int, toBuffer: Int) -> Move? {
         guard !caveDoors.contains(toBuffer) else { return nil }
-        let range = buffer[min(caveDoors[fromCave],toBuffer)...max(caveDoors[fromCave], toBuffer)]
+        let range = buffer[min(caveDoors[fromCave], toBuffer) ... max(caveDoors[fromCave], toBuffer)]
         if !range.contains(where: { $0 != .Empty }) {
             return CaveToBuffer(fromIndex: fromCave, toIndex: toBuffer)
         }
         return nil
     }
+
     func canMove(fromBuffer: Int, toAnotherBuffer: Int) -> Move? {
         guard !caveDoors.contains(toAnotherBuffer) else { return nil }
-        let mover = (min(fromBuffer, toAnotherBuffer)+1, max(fromBuffer, toAnotherBuffer)-1)
-        let range = buffer[min(mover.0, mover.1)...max(mover.1, mover.0)]
+        let mover = (min(fromBuffer, toAnotherBuffer) + 1, max(fromBuffer, toAnotherBuffer) - 1)
+        let range = buffer[min(mover.0, mover.1) ... max(mover.1, mover.0)]
         if !range.contains(where: { $0 != .Empty }) {
             return BufferToBuffer(fromIndex: min(mover.0, mover.1), toIndex: max(mover.1, mover.0))
         }
         return nil
     }
+
     func canMove(fromBuffer: Int, toCave: Int) -> Move? {
         if !caves[toCave].contains(where: { !($0 == podsByTarget[toCave] || $0 == .Empty) }) {
             var mover = (min(fromBuffer, caveDoors[toCave]), max(fromBuffer, caveDoors[toCave]))
@@ -141,13 +153,14 @@ class Map: Hashable {
             } else if mover.1 == fromBuffer {
                 mover.1 -= 1
             }
-            let range = buffer[mover.0...mover.1]
+            let range = buffer[mover.0 ... mover.1]
             if !range.contains(where: { $0 != .Empty }) {
                 return BufferToCave(fromIndex: fromBuffer, toIndex: toCave)
             }
         }
         return nil
     }
+
     func generateMoves() -> [Move] {
         var output = [Move]()
         guard !isDone() else { return [] }
@@ -190,17 +203,18 @@ class Map: Hashable {
         }
         return output
     }
+
     func realise(move: Move) -> Map? {
         let newMap = Map(caves: caves, buffer: buffer, cost: cost)
         if let move = move as? CaveToCave {
             if let idx = newMap.caves[move.fromIndex].firstIndex(where: { $0 != .Empty }) {
                 let temp = newMap.caves[move.fromIndex][idx]
                 newMap.caves[move.fromIndex][idx] = .Empty
-                if let destination = newMap.caves[move.toIndex].lastIndex(where: { $0 == .Empty}) {
+                if let destination = newMap.caves[move.toIndex].lastIndex(where: { $0 == .Empty }) {
                     newMap.caves[move.toIndex][destination] = temp
                     if let cost = costs[temp] {
                         let distance = idx + abs(caveDoors[move.fromIndex] - caveDoors[move.toIndex]) + destination + 3
-                        newMap.cost = newMap.cost +  distance * cost
+                        newMap.cost = newMap.cost + distance * cost
                     }
                 }
             }
